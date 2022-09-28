@@ -25,6 +25,8 @@ func main() {
     dbID := os.Getenv(ValueUnitDatabaseID)
     client := notionapi.NewClient(notionapi.Token(notionAPIToken))
 
+    updateFocusUnitInDatabaseOrPanic(client, notionapi.DatabaseID(dbID))
+
     ticker := time.NewTicker(1 * time.Minute)
 
     for curTime := range ticker.C {
@@ -98,13 +100,20 @@ func updateValueUnitFocusGraphic(ctx context.Context, c *notionapi.Client, page 
     }
     propertyVal.RichText[0].Text.Content = valueUnitGraphic
     page.Properties[PropertyTtitleFocus] = propertyVal
+    preserveAllFieldsExceptFocusField(page)
     _, err := c.Page.Update(ctx, notionapi.PageID(page.ID), &notionapi.PageUpdateRequest{
         Properties: page.Properties,
     })
-    if err != nil {
-        return err
-    }
     return err
+}
+
+func preserveAllFieldsExceptFocusField(page *notionapi.Page) {
+    for k := range page.Properties {
+        if k == PropertyTtitleFocus {
+            continue
+        }
+        delete(page.Properties, k)
+    }
 }
 
 func isValueUnitLive(p *notionapi.Page) bool {
