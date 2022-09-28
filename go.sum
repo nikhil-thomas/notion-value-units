@@ -1,0 +1,4 @@
+github.com/jomei/notionapi v1.9.2 h1:ZCTwssQKV7v4O9VoUqLGewpvhZwvnvtg2JHQbL+7hkg=
+github.com/jomei/notionapi v1.9.2/go.mod h1:wgxFlmxL+oIfxclWkt8jta0PkcBepajish2uCxzBxTo=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
